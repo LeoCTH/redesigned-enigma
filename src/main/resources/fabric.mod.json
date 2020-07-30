@@ -1,17 +1,13 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "redesignedenigma",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "redesigned-enigma",
+  "description": "Various tweaks here and there. Great for own use or prank use. Shout out to GitHub's RNG for coming up with such a deep name.",
   "authors": [
-    "Me!"
+    "leocth/LeoC200"
   ],
-  "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
-  },
 
   "license": "CC0-1.0",
   "icon": "assets/modid/icon.png",
@@ -19,19 +15,19 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleModKt::init"
+      "com.leocth.redesignedenigma.RedesignedEnigma"
+    ],
+    "client": [
+      "com.leocth.redesignedenigma.RedesignedEnigmaClient"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "coool.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.7.1",
     "fabric": "*",
     "fabric-language-kotlin": "*",
     "minecraft": "1.15.x"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }
