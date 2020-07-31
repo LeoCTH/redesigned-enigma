@@ -59,7 +59,7 @@ object PhysicsHelper {
                 // warning: it will get very complicated with complicated models.
                 for (bb in block.getCollisionShape(world, pos).boundingBoxes) {
                     val p = bb.offset(pos)
-                    if (x in p.x1..p.x2 && y in p.y1..p.y2 && z in p.z1..p.z2) {
+                    if (p.contains(x, y, z)) {
                         break@top
                     }
                 }
@@ -95,13 +95,15 @@ object PhysicsHelper {
         return success
     }
 
-    fun sendS2CUpdatePacket(hitPos: Vec3d, user: PlayerEntity) {
+    fun sendS2CUpdatePacket(canFire: Boolean, hitPos: Vec3d, user: PlayerEntity, needsReload: Boolean) {
         val watchingPlayers = PlayerStream.watching(user.world, user.blockPos)
         val packetData = PacketByteBuf(Unpooled.buffer())
 
+        packetData.writeBoolean(canFire)
         packetData.writeFloat(hitPos.x.toFloat())
         packetData.writeFloat(hitPos.y.toFloat())
         packetData.writeFloat(hitPos.z.toFloat())
+        packetData.writeBoolean(needsReload)
 
         watchingPlayers.forEach {
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(

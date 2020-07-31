@@ -8,6 +8,6 @@ object C2SPacketManager {
     val PEWPEW_C2S_FIRE_ID = Identifier(RedesignedEnigma.MODID, "pewpew_c2s_fire")
 
     fun register() {
-        ServerSidePacketRegistry.INSTANCE.register(PEWPEW_C2S_FIRE_ID, C2SFirePacketPewpewConsumer())
+        ServerSidePacketRegistry.INSTANCE.register(PEWPEW_C2S_FIRE_ID, C2SPewpewFirePacketConsumer())
     }
 }

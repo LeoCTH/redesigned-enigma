@@ -11,6 +11,7 @@ data class HitscanArgs(
 )
 {
     companion object {
+        @JvmField
         val DEFAULT = HitscanArgs({ it is LivingEntity }, 128, true, 1)
     }
 }

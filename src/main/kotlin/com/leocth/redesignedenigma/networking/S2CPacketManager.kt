@@ -8,6 +8,6 @@ object S2CPacketManager {
     val PEWPEW_S2C_UPDATE_ID = Identifier(RedesignedEnigma.MODID, "pewpew_s2c_update")
 
     fun register() {
-        ClientSidePacketRegistry.INSTANCE.register(PEWPEW_S2C_UPDATE_ID, S2CUpdatePewpewPacketConsumer())
+        ClientSidePacketRegistry.INSTANCE.register(PEWPEW_S2C_UPDATE_ID, S2CPewpewUpdatePacketConsumer())
     }
 }

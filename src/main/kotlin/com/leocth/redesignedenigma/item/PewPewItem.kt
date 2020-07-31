@@ -3,23 +3,21 @@ package com.leocth.redesignedenigma.item
 import com.leocth.redesignedenigma.RedesignedEnigma
 import com.leocth.redesignedenigma.addAll
 import com.leocth.redesignedenigma.interfaces.IFireOnLeftClick
+import com.leocth.redesignedenigma.interfaces.IReloadable
 import com.leocth.redesignedenigma.util.HitscanArgs
 import com.leocth.redesignedenigma.util.PhysicsHelper
 import com.leocth.redesignedenigma.util.damage.LethalWeaponryDamageSource
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.entity.Entity
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.EntityDamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
-import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
-class PewPewItem: Item(Settings().maxCount(1)), IFireOnLeftClick {
+class PewPewItem: Item(Settings().maxCount(1)), IFireOnLeftClick, IReloadable {
 
     override fun appendTooltip(
         stack: ItemStack,
@@ -42,22 +40,73 @@ class PewPewItem: Item(Settings().maxCount(1)), IFireOnLeftClick {
         user: PlayerEntity
     ): ActionResult {
         val world = user.world
-        val stack = user.mainHandStack
-        val tag = user.mainHandStack.orCreateTag
-        println(tag.getShort("debug_resammo"))
-        return if (!world.isClient) {
+        if (!world.isClient) {
+            val stack = user.mainHandStack
+            val tag = stack.orCreateTag
+
+            var resammo = tag.getShort("debug_resammo")
+            var reloadstarted = tag.getInt("debug_reloadstarted")
+            val curTick = user.server?.ticks ?: 0
+            var reload = false
+            val canFire: Boolean
+
+            println(curTick)
+            if (resammo <= 0) {
+                canFire = false
+                if (reloadstarted == 0) {
+                    println("start reload")
+                    // start reload
+                    reloadstarted = curTick
+                    reload = true
+                }
+                else if (reloadstarted + 50 < curTick){
+                    println("reload ended")
+                    // reload ended
+                    resammo = 10
+                    reloadstarted = 0
+                    reload = false
+                }
+                /*
+                else {
+                    // progress reload
+                }
+                */
+            }
+            else {
+                println("normal fire")
+                // calculate ammo and issue reload
+                canFire = true
+                --resammo
+            }
+            tag.putInt("debug_reloadstarted", reloadstarted)
+            tag.putShort("debug_resammo", resammo)
+
+
             val k = PhysicsHelper.calcHitscan(world, user, HitscanArgs.DEFAULT)
             { hitPos, entitiesHit ->
-                PhysicsHelper.sendS2CUpdatePacket(hitPos, user)
-                entitiesHit.forEach {
-                    it.damage(LethalWeaponryDamageSource(it, stack), 2.0f)
+                PhysicsHelper.sendS2CUpdatePacket(canFire, hitPos, user, reload)
+                // TODO optimize reduce waste calculations
+                if (canFire) {
+                    entitiesHit.forEach {
+                        it.damage(LethalWeaponryDamageSource(it, stack), 2.0f)
+                    }
                 }
             }
-            if (k) ActionResult.SUCCESS else ActionResult.PASS
+            return if (k) ActionResult.SUCCESS else ActionResult.PASS
         } else {
             //TODO: What the fuck?
             RedesignedEnigma.LOGGER.error("wtf? you shouldnt be here, client!")
-            ActionResult.PASS
+            return ActionResult.PASS
         }
+    }
+
+    override fun reloadStart(player: PlayerEntity, stack: ItemStack, tag: CompoundTag) {
+        tag.putInt("debug_reloadstarted", player.server?.ticks ?: 0)
+        //TODO send reload s2c packet
+    }
+
+    override fun reloadEnd(player: PlayerEntity, stack: ItemStack, tag: CompoundTag) {
+        tag.putInt("debug_reloadstarted", -1)
+
     }
 }
