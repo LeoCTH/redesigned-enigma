@@ -1,9 +1,18 @@
 {
     "item.redesignedenigma.sreax": "Sreax",
+    "item.redesignedenigma.pewpew": "Pew-Pew2k",
+
     "tooltip.redesignedenigma.sreax.desc1": "\"Admins' best friend\"",
     "tooltip.redesignedenigma.sreax.desc2": "§7\"Transmutation Table + Builders' Wand\"",
     "tooltip.redesignedenigma.sreax.energy": "§eStored Energy: %s/%s",
-    "tooltip.redesignedenigma.sreax.32bit": "§c(Use the 64-bit version of Minecraft for larger capacity!)",
     "tooltip.redesignedenigma.sreax.pr1": "§7§nPronunciation tip:",
-    "tooltip.redesignedenigma.sreax.pr2": "§b[sr:əx]§7, with a §o§ltrill§r§7 and an §oo§lch"
+    "tooltip.redesignedenigma.sreax.pr2": "§b[sr:əx]§7, with a §o§ltrill§r§7 and an §oo§lch",
+    "tooltip.redesignedenigma.pewpew.desc1": "§7Damages entities from a",
+    "tooltip.redesignedenigma.pewpew.desc2": "§7distance with our new",
+    "tooltip.redesignedenigma.pewpew.desc3": "§fHitSCANNER™ §7technology!",
+    "tooltip.redesignedenigma.pewpew.warn1": "§cWarning: this product emits",
+    "tooltip.redesignedenigma.pewpew.warn2": "§clasers. May cause severe eye",
+    "tooltip.redesignedenigma.pewpew.warn3": "§cinjury when used incorrectly.",
+
+    "death.redesignedenigma.lethalweaponry": "%1$s was shot by %2$s with %3$s"
 }

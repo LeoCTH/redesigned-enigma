@@ -1,9 +1,7 @@
 package com.leocth.redesignedenigma.util
 
-import com.google.common.math.IntMath.pow
-
 object I18nHelper {
-    val ordersOfMagnitudeSuffix = listOf("","k","M","G","T","P","E","Z","Y")
+    val ORDERS_OF_MAGNITUDE_SUFFIX = listOf("","k","M","G","T","P","E","Z","Y")
 
     fun getNumericShortForm(n: Long): String {
         var log = 0
@@ -12,6 +10,6 @@ object I18nHelper {
             ++log
             f /= 1000
         }
-        return "${f/1000.0}${ordersOfMagnitudeSuffix[log+1]}"
+        return "${f/1000.0}${ORDERS_OF_MAGNITUDE_SUFFIX[log+1]}"
     }
 }

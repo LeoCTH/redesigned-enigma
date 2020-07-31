@@ -5,8 +5,8 @@
   "mixins": [
   ],
   "client": [
-    "TitleScreenTweaksMixin",
-    "MouseScrollMixin"
+    "client.TitleScreenTweaksMixin",
+    "client.callback.AttackAttemptEventCallbackMixin"
   ],
   "injectors": {
     "defaultRequire": 1

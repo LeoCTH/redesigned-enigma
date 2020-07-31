@@ -1,4 +1,4 @@
-package com.leocth.redesignedenigma.mixin
+package com.leocth.redesignedenigma.mixin.client
 
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.TitleScreen

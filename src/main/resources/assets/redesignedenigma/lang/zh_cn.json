@@ -1,0 +1,18 @@
+{
+  "item.redesignedenigma.sreax": "Sreax",
+  "item.redesignedenigma.pewpew": "biubiu枪2000",
+
+  "tooltip.redesignedenigma.sreax.desc1": "\"OP坠吼的彭友\"",
+  "tooltip.redesignedenigma.sreax.desc2": "§7\"相当于转化台 + 建筑法杖\"",
+  "tooltip.redesignedenigma.sreax.energy": "§e已存储能量: %s/%s",
+  "tooltip.redesignedenigma.sreax.pr1": "§7§n发音指导:",
+  "tooltip.redesignedenigma.sreax.pr2": "§b[sr:əx]§7（反正你也学不会教了有啥用",
+  "tooltip.redesignedenigma.pewpew.desc1": "§7此产品使用我们最新的§fHitSCANNER™",
+  "tooltip.redesignedenigma.pewpew.desc2": "§7检测与伤害技术，帮您从远距离高效、",
+  "tooltip.redesignedenigma.pewpew.desc3": "§7便捷地击杀敌人！",
+  "tooltip.redesignedenigma.pewpew.warn1": "§c警告：本品发射激光。",
+  "tooltip.redesignedenigma.pewpew.warn2": "§c若使用不当，可产生严重的",
+  "tooltip.redesignedenigma.pewpew.warn3": "§c眼部损伤和不可逆的神经瘫痪。",
+
+  "death.redesignedenigma.lethalweaponry": "%2$s使用%3$s击杀了%1$s"
+}

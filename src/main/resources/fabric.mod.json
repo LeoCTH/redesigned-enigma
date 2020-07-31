@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "redesigned-enigma",
-  "description": "Various tweaks here and there. Great for own use or prank use. Shout out to GitHub's RNG for coming up with such a deep name.",
+  "description": "Various tweaks here and there. Great for own use or pranking other people. Shout out to GitHub's RNG for coming up with such a deep name.",
   "authors": [
     "leocth/LeoC200"
   ],
@@ -18,11 +18,11 @@
       "com.leocth.redesignedenigma.RedesignedEnigma"
     ],
     "client": [
-      "com.leocth.redesignedenigma.RedesignedEnigmaClient"
+      "com.leocth.redesignedenigma.client.RedesignedEnigmaClient"
     ]
   },
   "mixins": [
-    "coool.mixins.json"
+    "redesignedenigma.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.7.1",

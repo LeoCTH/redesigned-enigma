@@ -1,14 +1,11 @@
 package com.leocth.redesignedenigma.item
 
 import com.leocth.redesignedenigma.addAll
-import com.leocth.redesignedenigma.interfaces.IScrollableItem
 import com.leocth.redesignedenigma.util.I18nHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -17,9 +14,6 @@ import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
-import net.minecraft.util.Identifier
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import kotlin.math.sign
 
@@ -28,7 +22,7 @@ import kotlin.math.sign
  * All sources that are released publicly on GitHub are licensed under the MIT license.
  * Please do not redistribute this file to other platforms before acknowledging the author.
  */
-class SreaxItem : Item(Settings()), IScrollableItem {
+class SreaxItem : Item(Settings()) {
 
     companion object {
         val conversionTable = mapOf(
@@ -62,6 +56,7 @@ class SreaxItem : Item(Settings()), IScrollableItem {
             TranslatableText("tooltip.redesignedenigma.sreax.pr1"),
             TranslatableText("tooltip.redesignedenigma.sreax.pr2")
         )
+        super.appendTooltip(stack, world, tooltip, context)
     }
 
 
@@ -107,7 +102,7 @@ class SreaxItem : Item(Settings()), IScrollableItem {
         }
     }
 
-    override fun onScroll(player: PlayerEntity, stack: ItemStack, dwheel: Float): ActionResult {
+    /*override*/ fun onScroll(player: PlayerEntity, stack: ItemStack, dwheel: Float): ActionResult {
         val tag = stack.orCreateTag
         var selectId = tag.getInt("debug_selectId")
         selectId += dwheel.sign.toInt()
