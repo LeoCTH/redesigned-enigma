@@ -19,5 +19,5 @@ Current features:
 
 *Sound effects not included; See `REGARDING_RESOURCES_EN` for details.
 
-##Trivia
+## Trivia
 GitHub came up with the name, not me.
