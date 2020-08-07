@@ -1,0 +1,41 @@
+extremely short version for people in a hurry:
+the sound files are not here because i don't own them.
+you can do whatever you want on the code but do not claim them your own.
+i do own the other resources (lang/, models/, textures/) so don't distribute them without talking to me first.
+just please. don't be a jerk who steals other people's hard work just to base tiktok memes on them.
+
+tl;dr
+I own the rights to the source code and the resources included within the mod EXCEPT for the audio files. The audio
+files should only be used as placeholders for proper sound files that I could freely use and distribute.
+Do whatever you want on the source code within the MIT License, but do not plagiarize my code and call it your own
+under any circumstances. I own any other resources featured in this mod and I disallow distribution without permission.
+
+The really long and serious version:
+
+I do NOT own the sound resources for the current revisions of the mod. They are just some "royalty-free"
+sound effects that I downloaded off of the Internet and they are only intended to act as placeholders before
+acquiring proper audio resources and therefore NOT final, and should never be uploaded to GitHub without permission.
+
+However, you could substitute the sound effects with your own files, as .ogg files, as the files are referred internally
+by their path and filename.
+The sounds files in question are:
+sounds/ (root dir)
+    fire/
+        deagle.ogg  (Desert Eagle fire sfx)
+        glock.ogg   (Auto Glock fire sfx)
+    reload/
+        deagle.ogg  (Desert Eagle reload sfx)
+
+Just to wrap things up:
+The main code (everything under src/main/kotlin/ and java/ if applicable) is licensed under the MIT License.
+(Since I'm kind of a lazy f**k and I don't want to mess with other kinds of complicated licensing.)
+
+I do have full rights to:
+    - The language files (under src/resources/assets/redesignedenigma/lang/), whom I wrote myself in two languages:
+      English and Simplified Chinese.
+    - The model files (under src/resources/assets/redesignedenigma/models/item/ and block/), whom I created, textured,
+      exported and minified myself using Blockbench (and a browser), with original .bbmodel model files fully intact.
+    - The texture files (under src/resources/assets/redesignedenigma/textures/), whom I created to supplement the weapon
+      models as of the time of writing.
+
+-- leocth 2020/8/6
