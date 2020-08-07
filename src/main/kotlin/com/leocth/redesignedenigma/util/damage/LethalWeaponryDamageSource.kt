@@ -11,8 +11,13 @@ import net.minecraft.text.TranslatableText
 class LethalWeaponryDamageSource(
     private val culprit: Entity,
     private val weapon: ItemStack = ItemStack.EMPTY
-): EntityDamageSource("lethalweaponry", culprit) {
+) : EntityDamageSource("lethalweaponry", culprit), IIgnoreRegenCooldown {
     override fun getDeathMessage(victim: LivingEntity): Text {
-        return TranslatableText("death.${RedesignedEnigma.MODID}.$name", victim.displayName, culprit.displayName, weapon.toHoverableText())
+        return TranslatableText(
+            "death.${RedesignedEnigma.MODID}.$name",
+            victim.displayName,
+            culprit.displayName,
+            weapon.toHoverableText()
+        )
     }
 }

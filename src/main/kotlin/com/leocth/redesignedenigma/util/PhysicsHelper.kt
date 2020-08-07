@@ -1,16 +1,7 @@
 package com.leocth.redesignedenigma.util
 
-import com.leocth.redesignedenigma.networking.C2SPacketManager
-import com.leocth.redesignedenigma.networking.S2CPacketManager
-import io.netty.buffer.Unpooled
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
-import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.util.PacketByteBuf
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.MathHelper
@@ -49,7 +40,7 @@ object PhysicsHelper {
         var penetratedEntities = 0
         val entities = mutableListOf<Entity>()
         var i = 0
-        top@ while (i < args.maxRange) {
+        top@ while (penetratedEntities < args.penetrateEntitiesNum && i < args.maxRange) {
             // if we hit a block
             val pos = BlockPos(x, y, z)
             val block = world.getBlockState(pos)
@@ -80,8 +71,6 @@ object PhysicsHelper {
                 ++penetratedEntities
                 if (penetratedEntities <= args.penetrateEntitiesNum)
                     entities.addAll(ent)
-                else
-                    break@top
             }
             x += dirX * .5
             y += dirY * .5
@@ -93,29 +82,5 @@ object PhysicsHelper {
         else
             ifHitAction(Vec3d(x, y, z), entities)
         return success
-    }
-
-    fun sendS2CUpdatePacket(canFire: Boolean, hitPos: Vec3d, user: PlayerEntity, needsReload: Boolean) {
-        val watchingPlayers = PlayerStream.watching(user.world, user.blockPos)
-        val packetData = PacketByteBuf(Unpooled.buffer())
-
-        packetData.writeBoolean(canFire)
-        packetData.writeFloat(hitPos.x.toFloat())
-        packetData.writeFloat(hitPos.y.toFloat())
-        packetData.writeFloat(hitPos.z.toFloat())
-        packetData.writeBoolean(needsReload)
-
-        watchingPlayers.forEach {
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(
-                it, S2CPacketManager.PEWPEW_S2C_UPDATE_ID, packetData
-            )
-        }
-    }
-
-    @Environment(EnvType.CLIENT)
-    fun sendC2SFirePacket() {
-        val packetData = PacketByteBuf(Unpooled.buffer())
-
-        ClientSidePacketRegistry.INSTANCE.sendToServer(C2SPacketManager.PEWPEW_C2S_FIRE_ID, packetData)
     }
 }

@@ -2,7 +2,6 @@ package com.leocth.redesignedenigma.util;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import javafx.geometry.BoundingBox;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,7 +12,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * This is a Java file created by leoc200 on 2020/7/31 in project redesigned-enigma-

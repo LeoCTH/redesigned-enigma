@@ -110,7 +110,7 @@ class SreaxItem : Item(Settings()) {
             selectId += debugIdTable.size
         selectId %= debugIdTable.size
         println(selectId)
-        player.addChatMessage(LiteralText("DEBUG: Selected #$selectId: ${debugIdTable[selectId] ?: Blocks.EMERALD_BLOCK}"), true)
+        player.sendMessage(LiteralText("DEBUG: Selected #$selectId: ${debugIdTable[selectId] ?: Blocks.EMERALD_BLOCK}"), true)
         tag.putInt("debug_selectId", selectId)
         return ActionResult.FAIL
     }

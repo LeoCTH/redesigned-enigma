@@ -1,0 +1,5 @@
+{
+    "item.deagle.fire": {"sounds": [ "redesignedenigma:fire/deagle" ]},
+    "item.deagle.reload": {"sounds": [ "redesignedenigma:reload/deagle" ]},
+    "item.glock.fire": {"sounds": [ "redesignedenigma:fire/glock" ]}
+}

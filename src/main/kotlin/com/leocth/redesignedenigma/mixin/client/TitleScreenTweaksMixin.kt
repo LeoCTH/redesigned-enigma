@@ -2,6 +2,7 @@ package com.leocth.redesignedenigma.mixin.client
 
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.TitleScreen
+import net.minecraft.client.util.math.MatrixStack
 import org.objectweb.asm.Opcodes
 import org.spongepowered.asm.mixin.Mixin
 import org.spongepowered.asm.mixin.injection.At
@@ -12,7 +13,7 @@ abstract class TitleScreenTweaksMixin {
     var disguiseMod = true
 
     @Redirect(
-        method = ["render(IIF)V"],
+        method = ["render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V"],
         at = At(
             value = "FIELD",
             target = "Lnet/minecraft/client/gui/screen/TitleScreen;isMinceraft:Z",
@@ -21,6 +22,7 @@ abstract class TitleScreenTweaksMixin {
     )
     private fun trickIsMinceraftInRender(
         owner: TitleScreen,
+        matrixStack: MatrixStack,
         mouseX: Int,
         mouseY: Int,
         delta: Float
@@ -30,7 +32,7 @@ abstract class TitleScreenTweaksMixin {
     }
 
     @Redirect(
-        method = ["render(IIF)V"],
+        method = ["render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V"],
         at = At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/MinecraftClient;getVersionType()Ljava/lang/String;"
@@ -41,7 +43,7 @@ abstract class TitleScreenTweaksMixin {
     }
 
     @Redirect(
-        method = ["render(IIF)V"],
+        method = ["render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V"],
         at = At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;isModded()Z")
     )
     private fun trickIsModdedInRender(owner: MinecraftClient): Boolean {

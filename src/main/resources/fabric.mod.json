@@ -24,10 +24,11 @@
   "mixins": [
     "redesignedenigma.mixins.json"
   ],
+
   "depends": {
-    "fabricloader": ">=0.7.1",
+    "fabricloader": ">=0.9.0",
     "fabric": "*",
     "fabric-language-kotlin": "*",
-    "minecraft": "1.15.x"
+    "minecraft": "1.16.x"
   }
 }

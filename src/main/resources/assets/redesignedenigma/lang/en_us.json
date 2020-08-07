@@ -1,18 +1,26 @@
 {
     "item.redesignedenigma.sreax": "Sreax",
-    "item.redesignedenigma.pewpew": "Pew-Pew2k",
-
     "tooltip.redesignedenigma.sreax.desc1": "\"Admins' best friend\"",
     "tooltip.redesignedenigma.sreax.desc2": "§7\"Transmutation Table + Builders' Wand\"",
     "tooltip.redesignedenigma.sreax.energy": "§eStored Energy: %s/%s",
     "tooltip.redesignedenigma.sreax.pr1": "§7§nPronunciation tip:",
     "tooltip.redesignedenigma.sreax.pr2": "§b[sr:əx]§7, with a §o§ltrill§r§7 and an §oo§lch",
-    "tooltip.redesignedenigma.pewpew.desc1": "§7Damages entities from a",
-    "tooltip.redesignedenigma.pewpew.desc2": "§7distance with our new",
-    "tooltip.redesignedenigma.pewpew.desc3": "§fHitSCANNER™ §7technology!",
-    "tooltip.redesignedenigma.pewpew.warn1": "§cWarning: this product emits",
-    "tooltip.redesignedenigma.pewpew.warn2": "§clasers. May cause severe eye",
-    "tooltip.redesignedenigma.pewpew.warn3": "§cinjury when used incorrectly.",
+
+    "item.redesignedenigma.glock_full_mod": "Glock 18 Full-Mod",
+    "tooltip.redesignedenigma.glock_full_mod.desc1": "My favourite §bautomatic §fGlock modded with",
+    "tooltip.redesignedenigma.glock_full_mod.desc2": "a §6silencer§f, a §adrum§f, a §cred dot sight§f,",
+    "tooltip.redesignedenigma.glock_full_mod.desc3": "a §bforegrip§f and a §bfolding stock§f.",
+    "tooltip.redesignedenigma.glock_full_mod.witty1": "§7§oHow the f*** did this mount to that thing?",
+
+    "item.redesignedenigma.deagle": "Desert Eagle",
+    "tooltip.redesignedenigma.deagle.desc1": "Powerful semi automatic pistol",
+    "tooltip.redesignedenigma.deagle.desc2": "that fires .50 AE rounds, capable",
+    "tooltip.redesignedenigma.deagle.desc3": "of neutralizing enemies with one shot",
+    "tooltip.redesignedenigma.deagle.desc4": "on the head.",
+    "tooltip.redesignedenigma.deagle.witty1": "§7§oMind your wrist bone",
+
+    "text.redesignedenigma.ammo": "<<< [ %d / %d ] >>>",
+    "text.redesignedenigma.reloading": "<<< [ Reloading... %s ] >>>",
 
     "death.redesignedenigma.lethalweaponry": "%1$s was shot by %2$s with %3$s"
 }

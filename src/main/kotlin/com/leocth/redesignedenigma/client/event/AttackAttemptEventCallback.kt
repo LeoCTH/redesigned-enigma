@@ -30,19 +30,22 @@ interface AttackAttemptEventCallback {
          * NOTE: this actually creates an anonymous object every time you call it. :(
          * NOTE2: this will go away in Kotlin 1.4.
          */
-        inline operator fun invoke(crossinline function: (player: ClientPlayerEntity, hitResult: HitResult?) -> ActionResult) =
+        inline operator fun invoke(crossinline function: (player: ClientPlayerEntity, hitResult: HitResult?, heldDown: Boolean) -> ActionResult) =
             object : AttackAttemptEventCallback {
-                override fun interact(player: ClientPlayerEntity, hitResult: HitResult?): ActionResult = function(player, hitResult)
+                override fun interact(
+                    player: ClientPlayerEntity,
+                    hitResult: HitResult?,
+                    heldDown: Boolean
+                ): ActionResult = function(player, hitResult, heldDown)
             }
 
         var EVENT: Event<AttackAttemptEventCallback> =
             EventFactory.createArrayBacked(
                 AttackAttemptEventCallback::class.java
             ) { listeners: Array<AttackAttemptEventCallback> ->
-                AttackAttemptEventCallback {
-                    player: ClientPlayerEntity, hitResult: HitResult? ->
+                AttackAttemptEventCallback { player: ClientPlayerEntity, hitResult: HitResult?, heldDown: Boolean ->
                     for (listener in listeners) {
-                        val result = listener.interact(player, hitResult)
+                        val result = listener.interact(player, hitResult, heldDown)
                         if (result != ActionResult.PASS) {
                             return@AttackAttemptEventCallback result
                         }
@@ -52,5 +55,5 @@ interface AttackAttemptEventCallback {
             }
     }
 
-    fun interact(player: ClientPlayerEntity, hitResult: HitResult?): ActionResult
+    fun interact(player: ClientPlayerEntity, hitResult: HitResult?, heldDown: Boolean): ActionResult
 }

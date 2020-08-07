@@ -2,9 +2,8 @@
 package com.leocth.redesignedenigma
 import com.leocth.redesignedenigma.event.EventManager
 import com.leocth.redesignedenigma.item.REItems
-import com.leocth.redesignedenigma.networking.C2SPacketManager
+import com.leocth.redesignedenigma.network.C2SPacketManager
 import net.fabricmc.api.ModInitializer
-import net.minecraft.util.registry.Registry
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
@@ -16,8 +15,10 @@ class RedesignedEnigma: ModInitializer {
     override fun onInitialize() {
         LOGGER.info("Initializing...")
         LOGGER.info("Registering items...")
-        Registry.register(Registry.ITEM, "$MODID:sreax", REItems.SREAX)
-        Registry.register(Registry.ITEM, "$MODID:pewpew", REItems.PEWPEW)
+        REItems.register()
+
+        LOGGER.info("Registering sounds...")
+        RESounds.register()
 
         LOGGER.info("Registering events...")
         EventManager.register()

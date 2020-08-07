@@ -1,18 +1,26 @@
 {
   "item.redesignedenigma.sreax": "Sreax",
-  "item.redesignedenigma.pewpew": "biubiu枪2000",
-
   "tooltip.redesignedenigma.sreax.desc1": "\"OP坠吼的彭友\"",
   "tooltip.redesignedenigma.sreax.desc2": "§7\"相当于转化台 + 建筑法杖\"",
   "tooltip.redesignedenigma.sreax.energy": "§e已存储能量: %s/%s",
   "tooltip.redesignedenigma.sreax.pr1": "§7§n发音指导:",
   "tooltip.redesignedenigma.sreax.pr2": "§b[sr:əx]§7（反正你也学不会教了有啥用",
-  "tooltip.redesignedenigma.pewpew.desc1": "§7此产品使用我们最新的§fHitSCANNER™",
-  "tooltip.redesignedenigma.pewpew.desc2": "§7检测与伤害技术，帮您从远距离高效、",
-  "tooltip.redesignedenigma.pewpew.desc3": "§7便捷地击杀敌人！",
-  "tooltip.redesignedenigma.pewpew.warn1": "§c警告：本品发射激光。",
-  "tooltip.redesignedenigma.pewpew.warn2": "§c若使用不当，可产生严重的",
-  "tooltip.redesignedenigma.pewpew.warn3": "§c眼部损伤和不可逆的神经瘫痪。",
+
+  "item.redesignedenigma.glock_full_mod": "格洛克18全魔改",
+  "tooltip.redesignedenigma.glock_full_mod.desc1": "作者最得心应手的§b全自动§f格洛克",
+  "tooltip.redesignedenigma.glock_full_mod.desc2": "改装件，加装了§6延长消音器§f、§a弹鼓§f、",
+  "tooltip.redesignedenigma.glock_full_mod.desc3": "§c红点瞄准镜§f、§b前握把§f与§b折叠枪托。",
+  "tooltip.redesignedenigma.glock_full_mod.witty1": "§7§o这™是怎么装上去的？？",
+
+  "item.redesignedenigma.deagle": "Desert Eagle",
+  "tooltip.redesignedenigma.deagle.desc1": "Powerful semi automatic pistol",
+  "tooltip.redesignedenigma.deagle.desc2": "that fires §6.50 AE §frounds, capable",
+  "tooltip.redesignedenigma.deagle.desc3": "of neutralizing enemies with one shot",
+  "tooltip.redesignedenigma.deagle.desc4": "on the head.",
+  "tooltip.redesignedenigma.deagle.witty1": "§7§oMind your wrist bone",
+
+  "text.redesignedenigma.ammo": "<<< [ %d / %d ] >>>",
+  "text.redesignedenigma.reloading": "<<< [ 换弹中... %s ] >>>",
 
   "death.redesignedenigma.lethalweaponry": "%2$s使用%3$s击杀了%1$s"
 }
