@@ -39,7 +39,7 @@ interface AttackAttemptEventCallback {
                 ): ActionResult = function(player, hitResult, heldDown)
             }
 
-        var EVENT: Event<AttackAttemptEventCallback> =
+        @JvmField val EVENT: Event<AttackAttemptEventCallback> =
             EventFactory.createArrayBacked(
                 AttackAttemptEventCallback::class.java
             ) { listeners: Array<AttackAttemptEventCallback> ->

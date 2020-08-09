@@ -1,17 +1,17 @@
 {
-  "required": true,
-  "package": "com.leocth.redesignedenigma.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "LivingEntityMixin"
-  ],
-  "client": [
-    "client.TitleScreenTweaksMixin",
-    "client.HeldItemRendererMixin",
-    "client.ArmPoseHackMixin",
-    "client.callback.AttackAttemptEventCallbackMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "required": true,
+    "package": "com.leocth.redesignedenigma.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "LivingEntityMixin"
+    ],
+    "client": [
+        "client.TitleScreenTweaksMixin",
+        "client.HeldItemRendererMixin",
+        "client.ArmPoseHackMixin",
+        "client.callback.AttackAttemptEventCallbackMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
 }
