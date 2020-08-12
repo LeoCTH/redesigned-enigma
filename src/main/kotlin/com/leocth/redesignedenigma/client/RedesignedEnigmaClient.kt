@@ -2,11 +2,16 @@
 package com.leocth.redesignedenigma.client
 
 import com.leocth.redesignedenigma.client.event.ClientEventManager
+import com.leocth.redesignedenigma.client.render.entity.HEGrenadeEntityRenderer
 import com.leocth.redesignedenigma.client.render.item.BuiltinItemRendererManager
+import com.leocth.redesignedenigma.entity.REEntities
 import com.leocth.redesignedenigma.network.S2CPacketManager
 import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry
+import net.minecraft.client.render.entity.EntityRenderDispatcher
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+
 
 class RedesignedEnigmaClient : ClientModInitializer {
     companion object {
@@ -25,6 +30,9 @@ class RedesignedEnigmaClient : ClientModInitializer {
         ClientEventManager.register()
         LOGGER.info("Registering S2C packets...")
         S2CPacketManager.register()
+
+        EntityRendererRegistry.INSTANCE.register(REEntities.HE_GRENADE)
+        { dispatcher, _ -> HEGrenadeEntityRenderer(dispatcher) }
         LOGGER.info("Client class initialized; some client-side mixins may have already loaded, some have yet.")
     }
 }

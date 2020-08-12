@@ -22,7 +22,7 @@ object PhysicsHelper {
         world: World,
         player: PlayerEntity,
         args: HitscanArgs,
-        ifHitAction: (hitPosition: Vec3d, entitiesHit: List<Entity>) -> Unit
+        ifHitAction: (hitPosition: Vec3d, entitiesHit: Set<Entity>) -> Unit
     ) : Boolean {
         // where the player is looking at
         val pitch = player.pitch
@@ -38,7 +38,7 @@ object PhysicsHelper {
         var z = dirZ + player.z
         var success = false
         var penetratedEntities = 0
-        val entities = mutableListOf<Entity>()
+        val entities = mutableSetOf<Entity>()
         var i = 0
         top@ while (penetratedEntities < args.penetrateEntitiesNum && i < args.maxRange) {
             // if we hit a block
@@ -72,13 +72,13 @@ object PhysicsHelper {
                 if (penetratedEntities <= args.penetrateEntitiesNum)
                     entities.addAll(ent)
             }
-            x += dirX * .5
-            y += dirY * .5
-            z += dirZ * .5
+            x += dirX * .25
+            y += dirY * .25
+            z += dirZ * .25
             ++i
         }
         if (!success)
-            ifHitAction(Vec3d(x, y, z), emptyList())
+            ifHitAction(Vec3d(x, y, z), emptySet())
         else
             ifHitAction(Vec3d(x, y, z), entities)
         return success

@@ -15,10 +15,11 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Hand
 import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import kotlin.random.Random
 
-abstract class GunItem(settings: Settings) : Item(settings),
+abstract class AbstractGunItem(settings: Settings) : Item(settings),
     IFireOnLeftClick,
     IIgnoreEquipProgress,
     ICanReload,
@@ -60,26 +61,7 @@ abstract class GunItem(settings: Settings) : Item(settings),
             if (reloadTicks < 0) {
                 if (curAmmo > 0) {
                     --curAmmo
-                    PhysicsHelper.calcHitscan(world, user, hitscanArgs)
-                    { hitPos, entitiesHit ->
-                        playFireSound(world, user)
-                        //TODO: base inaccuracy on movement, action, etc.
-                        val recoil = getRecoilPattern(1f)
-                        user.pitch += recoil.first
-                        user.yaw += recoil.second
-                        (user as ServerPlayerEntity).networkHandler.sendPacket(
-                            PlayerPositionLookS2CPacket(
-                                0.0, 0.0, 0.0,
-                                recoil.second, recoil.first,
-                                setOf(Flag.X, Flag.Y, Flag.Z, Flag.X_ROT, Flag.Y_ROT),
-                                Random.nextInt()
-                            )
-                        )
-
-                        entitiesHit.forEach {
-                            it.damage(LethalWeaponryDamageSource(user, stack), damagePerShot)
-                        }
-                    }
+                    fireSingle(world, user, stack)
                 } else {
                     reloadTicks = 0
                 }
@@ -120,32 +102,42 @@ abstract class GunItem(settings: Settings) : Item(settings),
                             reloadTicks = -1
                         }
                     } else {
-                        reloadTicks = if (curAmmo <= 0) 0 else -1
+                        reloadTicks = resetReloadTicks(curAmmo)
                     }
                 } else {
-                    reloadTicks = if (curAmmo <= 0) 0 else -1
+                    reloadTicks = resetReloadTicks(curAmmo)
                     stopReloadSound(world, entity)
                 }
                 CustomData.saveCustomData(stack, reloadTicks, curAmmo)
             } else {
                 if (selected) {
-                    val client = MinecraftClient.getInstance()
-                    if (reloadProgress > 0.0f) {
-                        client.inGameHud.setOverlayMessage(
-                            TranslatableText(
-                                "text.redesignedenigma.reloading",
-                                String.format("%.2f%%", reloadProgress * 100)
-                            ),
-                            false
-                        )
-                    } else {
-                        client.inGameHud.setOverlayMessage(
-                            TranslatableText("text.redesignedenigma.ammo", curAmmo, holdAmmoNum),
-                            false
-                        )
-                    }
+                    clientDisplay(stack, world, entity, curAmmo, reloadTicks)
                 }
             }
+        }
+    }
+
+    protected fun fireSingle(world: World, user: PlayerEntity, stack: ItemStack) {
+        PhysicsHelper.calcHitscan(world, user, hitscanArgs)
+        { hitPos, entitiesHit -> ifHitAction(hitPos, entitiesHit, user, stack) }
+        playFireSound(world, user)
+        //TODO: base inaccuracy on movement, action, etc.
+        val recoil = getRecoilPattern(1f)
+        user.pitch += recoil.first
+        user.yaw += recoil.second
+        (user as ServerPlayerEntity).networkHandler.sendPacket(
+            PlayerPositionLookS2CPacket(
+                0.0, 0.0, 0.0,
+                recoil.second, recoil.first,
+                setOf(Flag.X, Flag.Y, Flag.Z, Flag.X_ROT, Flag.Y_ROT),
+                Random.nextInt()
+            )
+        )
+    }
+
+    protected fun ifHitAction(hitPos: Vec3d, entitiesHit: Set<Entity>, user: PlayerEntity, stack: ItemStack) {
+        entitiesHit.forEach {
+            it.damage(LethalWeaponryDamageSource(user, stack), damagePerShot)
         }
     }
 
@@ -157,4 +149,31 @@ abstract class GunItem(settings: Settings) : Item(settings),
 
     override fun getLeftArmPose(entity: LivingEntity, f1: Float, f2: Float, f3: Float, f4: Float, f5: Float)
             : Pair<Float, Float> = getFlatArmPose(entity)
+
+    protected fun resetReloadTicks(curAmmo: Short): Int = if (curAmmo <= 0) 0 else -1
+
+    protected fun clientDisplay(
+        stack: ItemStack,
+        world: World,
+        entity: PlayerEntity,
+        curAmmo: Short,
+        reloadTicks: Int
+    ) {
+        val reloadProgress = reloadTicks / reloadTime.toFloat()
+        val client = MinecraftClient.getInstance()
+        if (reloadProgress > 0.0f) {
+            client.inGameHud.setOverlayMessage(
+                TranslatableText(
+                    "text.redesignedenigma.reloading",
+                    String.format("%.2f%%", reloadProgress * 100)
+                ),
+                false
+            )
+        } else {
+            client.inGameHud.setOverlayMessage(
+                TranslatableText("text.redesignedenigma.ammo", curAmmo, holdAmmoNum),
+                false
+            )
+        }
+    }
 }

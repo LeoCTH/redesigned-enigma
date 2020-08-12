@@ -51,6 +51,7 @@ public abstract class LivingEntityMixin extends Entity {
         CallbackInfoReturnable<Boolean> cir,
         float f, boolean bl, float g
     ) {
+
         if (source instanceof IIgnoreRegenCooldown) {
             this.lastDamageTaken = amount;
             this.timeUntilRegen = 0;

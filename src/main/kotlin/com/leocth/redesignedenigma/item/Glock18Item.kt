@@ -1,29 +1,30 @@
 package com.leocth.redesignedenigma.item
 
 import com.leocth.redesignedenigma.RESounds
-import com.leocth.redesignedenigma.addAll
-import com.leocth.redesignedenigma.item.weapon.AutomaticGunItem
+import com.leocth.redesignedenigma.item.weapon.BurstCapableGunItem
 import com.leocth.redesignedenigma.util.HitscanArgs
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
 import net.minecraft.network.packet.s2c.play.StopSoundS2CPacket
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import kotlin.random.Random
 
-class GlockFullModItem : AutomaticGunItem(REItems.BASIC_WEAPON_SETTINGS) {
-
-    override val holdAmmoNum = 50
-    override val reloadTime = 40
-    override val damagePerShot = 3.8f
+class Glock18Item: BurstCapableGunItem(REItems.BASIC_WEAPON_SETTINGS) {
+    override val holdAmmoNum = 20
+    override val reloadTime = 45
+    override val damagePerShot = 5.85f
     override val hitscanArgs = HitscanArgs.DEFAULT
+
+    override fun getRecoilPattern(inaccuracy: Float): Pair<Float, Float> {
+        //TODO
+        val randomPitch = -3.67f + Random.nextFloat() * 5.863f * (1.53f - inaccuracy)
+        val randomYaw = Random.nextFloat() * 2.593f * (1.29f - inaccuracy) - 1.573f
+        return randomPitch to randomYaw
+    }
 
     override fun playFireSound(world: World, player: PlayerEntity) {
         if (!world.isClient) {
@@ -55,26 +56,5 @@ class GlockFullModItem : AutomaticGunItem(REItems.BASIC_WEAPON_SETTINGS) {
         (player as ServerPlayerEntity).networkHandler.sendPacket(
             StopSoundS2CPacket(Identifier("minecraft:block.note_block.guitar"), SoundCategory.PLAYERS)
         )
-    }
-
-    override fun getRecoilPattern(inaccuracy: Float): Pair<Float, Float> {
-        val randomYaw = Random.nextFloat() * 0.25f * (1.56f - inaccuracy) - 0.176f
-        val randomPitch = -0.48f + Random.nextFloat() * 0.16f * (1.237f - inaccuracy)
-        return randomPitch to randomYaw
-    }
-
-    override fun appendTooltip(
-        stack: ItemStack,
-        world: World?,
-        tooltip: MutableList<Text>,
-        context: TooltipContext
-    ) {
-        tooltip.addAll(
-            TranslatableText("tooltip.redesignedenigma.glock_full_mod.desc1"),
-            TranslatableText("tooltip.redesignedenigma.glock_full_mod.desc2"),
-            TranslatableText("tooltip.redesignedenigma.glock_full_mod.desc3"),
-            TranslatableText("tooltip.redesignedenigma.glock_full_mod.witty1")
-        )
-        super.appendTooltip(stack, world, tooltip, context)
     }
 }

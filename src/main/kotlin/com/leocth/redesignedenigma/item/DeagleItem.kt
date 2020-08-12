@@ -15,7 +15,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.world.World
 import kotlin.random.Random
 
-class DeagleItem : SemiGunItem(Settings().maxCount(1)) {
+class DeagleItem : SemiGunItem(REItems.BASIC_WEAPON_SETTINGS) {
     override val holdAmmoNum = 7
     override val reloadTime = 44
     override val damagePerShot = 11.3f
