@@ -33,7 +33,7 @@ abstract class AbstractGunItem(settings: Settings) : Item(settings),
     abstract fun getRecoilPattern(inaccuracy: Float): Pair<Float, Float>
 
     abstract fun playFireSound(world: World, player: PlayerEntity)
-    abstract fun playReloadSound(world: World, player: PlayerEntity, reloadProgress: Float, isStartingReload: Boolean)
+    abstract fun playReloadSound(world: World, player: PlayerEntity)
     abstract fun stopReloadSound(world: World, player: PlayerEntity)
 
     private data class CustomData(val reloadTicks: Int, val curAmmo: Short) {
@@ -89,13 +89,13 @@ abstract class AbstractGunItem(settings: Settings) : Item(settings),
                 // that's what you get when emulating csgo behavior, sucker!
                 // interrupts yo reload!
                 if (selected) {
-                    if (reloadTicks >= 0) {
+                    if (reloadTicks == 0) {
                         playReloadSound(
                             entity.world,
-                            entity,
-                            reloadProgress,
-                            reloadTicks == 0
+                            entity
                         )
+                    }
+                    if (reloadTicks >= 0) {
                         ++reloadTicks
                         if (reloadTicks >= reloadTime) {
                             curAmmo = holdAmmoNum.toShort()

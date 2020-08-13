@@ -1,5 +1,6 @@
 @file:JvmName("RedesignedEnigma")
 package com.leocth.redesignedenigma
+import com.leocth.redesignedenigma.block.REBlocks
 import com.leocth.redesignedenigma.event.EventManager
 import com.leocth.redesignedenigma.item.REItems
 import com.leocth.redesignedenigma.network.C2SPacketManager
@@ -16,6 +17,9 @@ class RedesignedEnigma: ModInitializer {
         LOGGER.info("Initializing...")
         LOGGER.info("Registering items...")
         REItems.register()
+
+        LOGGER.info("Registering blocks...")
+        REBlocks.register()
 
         LOGGER.info("Registering sounds...")
         RESounds.register()

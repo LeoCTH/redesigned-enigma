@@ -11,6 +11,7 @@ object REItems {
     val SREAX = SreaxItem()
     val DEAGLE = DeagleItem()
     val GLOCK_18 = Glock18Item()
+    val AWP = AwpItem()
 
     val HE_GRENADE = HEGrenadeItem()
 
@@ -19,6 +20,7 @@ object REItems {
         Registry.register(Registry.ITEM, "${RedesignedEnigma.MODID}:glock_full_mod", GLOCK_FULL_MOD)
         Registry.register(Registry.ITEM, "${RedesignedEnigma.MODID}:deagle", DEAGLE)
         Registry.register(Registry.ITEM, "${RedesignedEnigma.MODID}:glock_18", GLOCK_18)
+        Registry.register(Registry.ITEM, "${RedesignedEnigma.MODID}:awp", AWP)
         Registry.register(Registry.ITEM, "${RedesignedEnigma.MODID}:he_grenade", HE_GRENADE)
     }
 }

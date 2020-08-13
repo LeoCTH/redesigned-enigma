@@ -1,5 +1,16 @@
 {
-    "item.deagle.fire": {"sounds": [ "redesignedenigma:fire/deagle" ]},
-    "item.deagle.reload": {"sounds": [ "redesignedenigma:reload/deagle" ]},
-    "item.glock.fire": {"sounds": [ "redesignedenigma:fire/glock" ]}
+    "item.deagle.equip":    {"sounds": [ "redesignedenigma:deagle/equip"        ]},
+    "item.deagle.fire":     {"sounds": [ "redesignedenigma:deagle/fire"         ]},
+    "item.deagle.reload":   {"sounds": [ "redesignedenigma:deagle/reload"       ]},
+
+    "item.glock.equip":     {"sounds": [ "redesignedenigma:glock/equip"         ]},
+    "item.glock.fire":      {"sounds": [ "redesignedenigma:glock/fire"          ]},
+    "item.glock.reload":    {"sounds": [ "redesignedenigma:glock/reload"        ]},
+    "item.glock.burst":     {"sounds": [ "redesignedenigma:glock/burst"         ]},
+    "item.glock.selectfire":{"sounds": [ "redesignedenigma:glock/selectfire"    ]},
+
+    "item.awp.equip":       {"sounds": [ "redesignedenigma:awp/equip"           ]},
+    "item.awp.fire":        {"sounds": [ "redesignedenigma:awp/fire"            ]},
+    "item.awp.reload":      {"sounds": [ "redesignedenigma:awp/reload"          ]},
+    "item.awp.scope":       {"sounds": [ "redesignedenigma:awp/scope"           ]}
 }

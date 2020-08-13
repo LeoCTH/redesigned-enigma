@@ -1,14 +1,18 @@
 @file:JvmName("RedesignedEnigmaClient")
 package com.leocth.redesignedenigma.client
 
+import com.leocth.redesignedenigma.RedesignedEnigma
 import com.leocth.redesignedenigma.client.event.ClientEventManager
+import com.leocth.redesignedenigma.client.render.CompakModelProvider
 import com.leocth.redesignedenigma.client.render.entity.HEGrenadeEntityRenderer
 import com.leocth.redesignedenigma.client.render.item.BuiltinItemRendererManager
+import com.leocth.redesignedenigma.client.render.model.CompakModel
 import com.leocth.redesignedenigma.entity.REEntities
 import com.leocth.redesignedenigma.network.S2CPacketManager
 import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry
-import net.minecraft.client.render.entity.EntityRenderDispatcher
+import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
@@ -20,7 +24,13 @@ class RedesignedEnigmaClient : ClientModInitializer {
     override fun onInitializeClient() {
         LOGGER.info("Initializing client...")
 
-        //OBJLoader.INSTANCE.registerDomain(RedesignedEnigma.MODID)
+        LOGGER.info("Registering custom models...")
+
+        ModelLoadingRegistry.INSTANCE.registerResourceProvider {
+            val mp = CompakModelProvider(RedesignedEnigma.MODID, it)
+            mp.registerBlockModel("test")
+            mp
+        }
 
         LOGGER.info("Registering builtin item renderers...")
         BuiltinItemRendererManager.register()

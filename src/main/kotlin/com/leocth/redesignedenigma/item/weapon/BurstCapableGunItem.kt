@@ -12,6 +12,8 @@ import net.minecraft.world.World
 
 abstract class BurstCapableGunItem(settings: Settings) : AbstractGunItem(settings) {
 
+    abstract fun playSelectFireSound(world: World, player: PlayerEntity)
+
     private data class CustomData(
         val reloadTicks: Int,
         val curAmmo: Short,
@@ -80,15 +82,14 @@ abstract class BurstCapableGunItem(settings: Settings) : AbstractGunItem(setting
         if (entity is PlayerEntity) {
             var (reloadTicks, curAmmo, isBurstMode, burstRoundsLeft) = CustomData.loadCustomData(stack)
             if (!world.isClient) {
-                val reloadProgress = MathHelper.clamp(reloadTicks / reloadTime.toFloat(), 0.0f, 1.0f)
                 if (selected) {
-                    if (reloadTicks >= 0) {
+                    if (reloadTicks == 0) {
                         playReloadSound(
                             entity.world,
-                            entity,
-                            reloadProgress,
-                            reloadTicks == 0
+                            entity
                         )
+                    }
+                    if (reloadTicks >= 0) {
                         ++reloadTicks
                         if (reloadTicks >= reloadTime) {
                             curAmmo = holdAmmoNum.toShort()
@@ -125,14 +126,7 @@ abstract class BurstCapableGunItem(settings: Settings) : AbstractGunItem(setting
         val stack = user.getStackInHand(hand)
         var (reloadTicks, curAmmo, isBurstMode, burstRoundsLeft) = CustomData.loadCustomData(stack)
         isBurstMode = !isBurstMode
-        world.playSound(
-            null,
-            user.blockPos,
-            SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP,
-            SoundCategory.PLAYERS,
-            0.8f,
-            if (isBurstMode) 1.0f else 0.7f
-        )
+        playSelectFireSound(world, user)
         CustomData.saveCustomData(stack, reloadTicks, curAmmo, isBurstMode, burstRoundsLeft)
         return TypedActionResult.fail(stack)
     }

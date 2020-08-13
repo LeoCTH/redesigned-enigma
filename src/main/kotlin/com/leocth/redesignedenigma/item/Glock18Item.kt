@@ -14,6 +14,8 @@ import net.minecraft.world.World
 import kotlin.random.Random
 
 class Glock18Item: BurstCapableGunItem(REItems.BASIC_WEAPON_SETTINGS) {
+
+
     override val holdAmmoNum = 20
     override val reloadTime = 45
     override val damagePerShot = 5.85f
@@ -27,34 +29,38 @@ class Glock18Item: BurstCapableGunItem(REItems.BASIC_WEAPON_SETTINGS) {
     }
 
     override fun playFireSound(world: World, player: PlayerEntity) {
-        if (!world.isClient) {
-            world.playSound(
-                null,
-                player.blockPos,
-                RESounds.GLOCK_FIRE,
-                SoundCategory.PLAYERS,
-                0.2f,
-                1.0f
-            )
-        }
+        world.playSound(
+            null,
+            player.blockPos,
+            RESounds.GLOCK_FIRE,
+            SoundCategory.PLAYERS,
+            1.0f, 1.0f
+        )
     }
 
-    override fun playReloadSound(world: World, player: PlayerEntity, reloadProgress: Float, isStartingReload: Boolean) {
-        if (reloadProgress > 0.0f && !world.isClient) {
-            world.playSound(
-                null,
-                player.blockPos,
-                SoundEvents.BLOCK_NOTE_BLOCK_GUITAR,
-                SoundCategory.PLAYERS,
-                0.2f,
-                MathHelper.lerp(reloadProgress, 0.7f, 1.5f)
-            )
-        }
+    override fun playReloadSound(world: World, player: PlayerEntity) {
+        world.playSound(
+            null,
+            player.blockPos,
+            RESounds.GLOCK_RELOAD,
+            SoundCategory.PLAYERS,
+            1.0f, 1.0f
+        )
     }
 
     override fun stopReloadSound(world: World, player: PlayerEntity) {
         (player as ServerPlayerEntity).networkHandler.sendPacket(
-            StopSoundS2CPacket(Identifier("minecraft:block.note_block.guitar"), SoundCategory.PLAYERS)
+            StopSoundS2CPacket(RESounds.GLOCK_RELOAD_ID, SoundCategory.PLAYERS)
+        )
+    }
+
+    override fun playSelectFireSound(world: World, player: PlayerEntity) {
+        world.playSound(
+            null,
+            player.blockPos,
+            RESounds.GLOCK_SELECTFIRE,
+            SoundCategory.PLAYERS,
+            1.0f, 1.0f
         )
     }
 }

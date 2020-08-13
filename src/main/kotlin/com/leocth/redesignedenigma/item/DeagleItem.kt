@@ -28,21 +28,19 @@ class DeagleItem : SemiGunItem(REItems.BASIC_WEAPON_SETTINGS) {
                 player.blockPos,
                 RESounds.DEAGLE_FIRE,
                 SoundCategory.PLAYERS,
-                0.2f,
-                1.0f
+                1.0f, 1.0f
             )
         }
     }
 
-    override fun playReloadSound(world: World, player: PlayerEntity, reloadProgress: Float, isStartingReload: Boolean) {
-        if (isStartingReload && !world.isClient) {
+    override fun playReloadSound(world: World, player: PlayerEntity) {
+        if (!world.isClient) {
             world.playSound(
                 null,
                 player.blockPos,
                 RESounds.DEAGLE_RELOAD,
                 SoundCategory.PLAYERS,
-                0.8f,
-                1.0f
+                1.0f, 1.0f
             )
         }
     }

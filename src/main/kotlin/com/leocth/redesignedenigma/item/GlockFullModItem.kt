@@ -32,28 +32,24 @@ class GlockFullModItem : AutomaticGunItem(REItems.BASIC_WEAPON_SETTINGS) {
                 player.blockPos,
                 RESounds.GLOCK_FIRE,
                 SoundCategory.PLAYERS,
-                0.2f,
-                1.0f
+                1.0f, 1.0f
             )
         }
     }
 
-    override fun playReloadSound(world: World, player: PlayerEntity, reloadProgress: Float, isStartingReload: Boolean) {
-        if (reloadProgress > 0.0f && !world.isClient) {
-            world.playSound(
-                null,
-                player.blockPos,
-                SoundEvents.BLOCK_NOTE_BLOCK_GUITAR,
-                SoundCategory.PLAYERS,
-                0.2f,
-                MathHelper.lerp(reloadProgress, 0.7f, 1.5f)
-            )
-        }
+    override fun playReloadSound(world: World, player: PlayerEntity) {
+        world.playSound(
+            null,
+            player.blockPos,
+            RESounds.GLOCK_RELOAD,
+            SoundCategory.PLAYERS,
+            1.0f, 1.0f
+        )
     }
 
     override fun stopReloadSound(world: World, player: PlayerEntity) {
         (player as ServerPlayerEntity).networkHandler.sendPacket(
-            StopSoundS2CPacket(Identifier("minecraft:block.note_block.guitar"), SoundCategory.PLAYERS)
+            StopSoundS2CPacket(RESounds.GLOCK_RELOAD_ID, SoundCategory.PLAYERS)
         )
     }
 
